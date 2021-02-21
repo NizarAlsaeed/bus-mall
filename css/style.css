@@ -1,0 +1,56 @@
+*:not(body){
+    border: 1px hidden black;
+}
+body{
+    max-width: 1366px;
+    background-color: lightgoldenrodyellow;
+    margin: 0 auto;
+    color: rgb(26, 24, 24);
+    font-family:  Tahoma, sans-serif;
+    font-size: 16px;
+}
+nav{
+    height: 100px;
+    width: 100%;
+    margin-bottom: 50px;
+    font-family: cursive;
+}
+h1{
+    display: inline-block;
+    margin-bottom: 40px;
+}
+main{
+    display: flex;
+    justify-content: space-between;
+}
+
+div{
+    display: inline-block;
+}
+footer{
+    height: 150px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+p{
+    width: 600px;
+}
+#images img{
+    margin: 5px;
+    border: khaki 5px dashed;
+}
+#results{
+    text-align: left;
+}
+
+
+#results button{
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    background-color:rgb(233, 221, 110);
+}
+#results button:active{
+    background-color: white;
+}
