@@ -58,22 +58,23 @@ for (let i = 0; i < numberOfShownImgs; i++) {
 
 
 //rendring the chosen products uniqely AND increase views
+let chosenImg = [];
 function render(){
-  let chosenImg = [];
+  //debugger;
   let tempNum=0;
   for (let i = 0; i < numberOfShownImgs; i++){
     do {
       tempNum=(randomNumber(0,imgArr.length-1));
     }while(chosenImg.includes(tempNum));
-    chosenImg.push(tempNum);
+    chosenImg.push(tempNum);}
+  if(chosenImg.length===6)chosenImg.splice(0,3);
+  for (let i = 0; i < numberOfShownImgs; i++){
     newImgArr[i].src=Product.all[chosenImg[i]].path;
     newImgArr[i].alt=Product.all[chosenImg[i]].name;
     newImgArr[i].title=Product.all[chosenImg[i]].name;
-    Product.all[chosenImg[i]].views++;
-  }
+    Product.all[chosenImg[i]].views++;}
+
 }
-
-
 
 
 const imagesContainer= document.getElementById('images');
@@ -85,7 +86,7 @@ function countClicks(event){
 
       for (let i = 0; i < Product.all.length; i++) {
         if (Product.all[i].name === event.target.title) {
-          console.log(Product.all[i].name , event.target.title);
+          console.log(Product.all[i].name);
           Product.all[i].clicks++;
         }
       }
@@ -103,13 +104,50 @@ for (let i = 0; i < Product.all.length; i++){
   ulEl.appendChild(liEl);
   liElArr.push(liEl);
 }
-function showResults(){ //called by the button using onclick
-  for (let i = 0; i < Product.all.length; i++) {
-    liElArr[i].textContent=`${Product.all[i].name} had ${Product.all[i].clicks} votes, and was seen ${Product.all[i].views} times.`;
-  }
 
+
+let chartType;
+const FORM = document.getElementById('form');
+FORM.addEventListener('submit',chooseChartType);
+
+
+function chooseChartType(event){
+  event.preventDefault();
+  chartType = event.target.selectChart.value;
+  document.getElementById('canvasId').remove();
+  showResults();
 }
 
+function showResults(){ //called by the button using onclick
+  document.getElementById('button').onclick='';
+  let clicksArr =[];
+  for (let i = 0; i < Product.all.length; i++) {
+    liElArr[i].textContent=`${Product.all[i].name} had ${Product.all[i].clicks} votes, and was seen ${Product.all[i].views} times.`;
+    clicksArr.push(Product.all[i].clicks);
+  }
+  const chartSection = document.getElementById('chartSection');
+  const canvas = document.createElement('canvas');
+  canvas.id='canvasId';
+  chartSection.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  if(counter===limit){
+    new Chart(ctx,{
+      type: chartType,
+      data: {
+        labels: imgArr,
+        datasets: [{
+          label: '# of Votes',
+          data: clicksArr,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+      }
+    });
+  }
+}
 
 let counter = 0;
 let limit = 25;

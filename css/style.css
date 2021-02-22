@@ -1,4 +1,4 @@
-*:not(body){
+*{
     border: 1px hidden black;
 }
 body{
@@ -8,6 +8,7 @@ body{
     color: rgb(26, 24, 24);
     font-family:  Tahoma, sans-serif;
     font-size: 16px;
+    padding: 0 20px;
 }
 nav{
     height: 100px;
@@ -53,4 +54,36 @@ p{
 }
 #results button:active{
     background-color: white;
+}
+
+#chartSection{
+    margin: 0 auto;
+    text-align: center;
+
+}
+
+form{
+    margin: 20px 0;
+    text-align: center;
+    font-size: large;
+}
+
+canvas{
+
+    width:800px !important;
+    height:500px !important;
+    border: solid rgb(233, 221, 110) 3px;
+  
+  }
+
+#submit{
+    width: 100px;
+    height: 30px;
+    cursor: pointer;
+    background-color:rgb(233, 221, 110);
+}
+
+#selectChart{
+    width: 100px;
+    text-align: center;
 }
