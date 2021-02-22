@@ -16,19 +16,34 @@
         <section id="results">
             <h2>Results</h2>
 
-            <button onclick="showResults()">View results</button>
+            <button id="button" onclick="showResults()">View results</button>
         </section>
         <section>
             <div id="images"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae veniam nulla, sequi eligendi unde, nobis quia deleniti nesciunt atque quo aliquid cum blanditiis corrupti necessitatibus velit libero dignissimos, possimus porro!</p>
-
+       
+        
+        <section id="chartSection">
+            <form id="form">
+                <label for="selectChart">Choose chart type:</label>
+                <select name="selectChart" id="selectChart">
+                <option value="bar" selected="selected">bar</option>
+                <option value="pie">pie</option>
+                <option value="radar">radar</option>
+                <option value="line">line</option>
+                </select>
+                <input type="submit" value="Submit" id="submit">
+            </form>
+            <br>
         </section>
+    </section>
 
     </main>
+
     <footer>
 
     </footer>
-
-<script src="./js/app.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </body>
 </html>
