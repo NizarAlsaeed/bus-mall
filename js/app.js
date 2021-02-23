@@ -120,10 +120,11 @@ function chooseChartType(event){
 
 function showResults(){ //called by the button using onclick
   document.getElementById('button').onclick='';
-  let clicksArr =[];
+  let clicksArr =[],viewsArr=[];
   for (let i = 0; i < Product.all.length; i++) {
     liElArr[i].textContent=`${Product.all[i].name} had ${Product.all[i].clicks} votes, and was seen ${Product.all[i].views} times.`;
     clicksArr.push(Product.all[i].clicks);
+    viewsArr.push(Product.all[i].views);
   }
   const chartSection = document.getElementById('chartSection');
   const canvas = document.createElement('canvas');
@@ -136,9 +137,14 @@ function showResults(){ //called by the button using onclick
       data: {
         labels: imgArr,
         datasets: [{
-          label: '# of Votes',
+          label: '# of Clicks',
           data: clicksArr,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          backgroundColor: 'rgba(54, 162, 235, 0.4)',
+        },
+        {
+          label: '# of Views',
+          data: viewsArr,
+          backgroundColor: ' rgba(69, 235, 54, 0.4)',
         }],
       },
       options: {
