@@ -25,12 +25,24 @@ function Product(name,path){
   this.name=name;
   this.path=path;
   Product.all.push(this);
-  this.views=0;
-  this.clicks=0;
+  if(localStorage.length===0){
+    this.views=0;
+    this.clicks=0;
+  }else{
+    for (let i = 0; i < 20; i++) {
+      if((JSON.parse(localStorage.getItem('AllProducts'))[i].name === this.name))
+      { console.log('okkk');
+        this.views= JSON.parse(localStorage.getItem('AllProducts'))[i].views ;
+        this.clicks=JSON.parse(localStorage.getItem('AllProducts'))[i].clicks;
+      }else console.log('not okkk');
+    }}
 }
 Product.all=[];
 
-
+function retrieve(){
+  console.table(Product.all);
+ // Product.all=JSON.parse(localStorage.getItem('AllProducts'));
+}
 
 // creating product objects
 for (let i = 0; i < imgArr.length; i++) {
@@ -72,7 +84,9 @@ function render(){
     newImgArr[i].src=Product.all[chosenImg[i]].path;
     newImgArr[i].alt=Product.all[chosenImg[i]].name;
     newImgArr[i].title=Product.all[chosenImg[i]].name;
-    Product.all[chosenImg[i]].views++;}
+    Product.all[chosenImg[i]].views++;
+
+  }
 
 }
 
@@ -131,6 +145,7 @@ function showResults(){ //called by the button using onclick
   canvas.id='canvasId';
   chartSection.appendChild(canvas);
   const ctx = canvas.getContext('2d');
+  if(chartType===undefined){chartType='bar';}
   if(counter===limit){
     new Chart(ctx,{
       type: chartType,
@@ -152,6 +167,9 @@ function showResults(){ //called by the button using onclick
         maintainAspectRatio: false,
       }
     });
+    console.log('hi');
+    localStorage.setItem('AllProducts',JSON.stringify(Product.all));
+    localStorage.setItem('test',0);
   }
 }
 
@@ -159,7 +177,7 @@ let counter = 0;
 let limit = 25;
 
 render();
-
+retrieve();
 //----------------------helper function----------------
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
